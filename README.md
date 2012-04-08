@@ -4,7 +4,7 @@ This is a small experiment triggered by a [Stackoverflow
 question](http://stackoverflow.com/questions/10058996/about-changing-binding-of-a-proc-in-ruby)
 which realizes a certain, flexible form of dynamic binding in Ruby.
 
-In particular, using this means we can run an existing `Proc` instance in a new
+In particular, using this we can run an existing `Proc` instance in a new
 context:
 
     require 'dynamic_binding'
@@ -33,3 +33,6 @@ lookup scenarios:
     stack.push_hash(:var => 4)
 
     p stack.run_proc(l, 5)  # => 15
+
+Note that the lambda is defined at the *beginning* of the code, so none of
+the names it accesses are actually captured by its closure!
