@@ -20,6 +20,10 @@ module DynamicBinding
       raise NoMethodError
     end
 
+    def pop_binding
+      @bindings.pop
+    end
+
     def push_binding(bind)
       @bindings.push bind
     end
