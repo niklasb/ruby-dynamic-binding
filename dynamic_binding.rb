@@ -31,7 +31,7 @@ module DynamicBinding
     end
 
     def push_hash(vars)
-      push_instance OpenStruct.new(vars)
+      push_instance Struct.new(*vars.keys).new(*vars.values)
     end
 
     def run_proc(p, *args)
