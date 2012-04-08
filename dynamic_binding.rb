@@ -1,5 +1,3 @@
-require 'ostruct'
-
 module DynamicBinding
   class LookupStack
     def initialize(bindings = [])
@@ -36,6 +34,15 @@ module DynamicBinding
 
     def run_proc(p, *args)
       instance_exec(*args, &p)
+    end
+
+    def push_method(name, p, obj=nil)
+      x = Object.new
+      singleton = class << x; self; end
+      singleton.send(:define_method, name, lambda { |*args|
+        obj.instance_exec(*args, &p)
+      })
+      push_instance x
     end
   end
 end
