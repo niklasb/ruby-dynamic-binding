@@ -17,7 +17,7 @@ module DynamicBinding
         rescue NameError
         end
       end
-      raise NoMethodError
+      raise NoMethodError, "No such method: %s" % m
     end
 
     def pop_binding
