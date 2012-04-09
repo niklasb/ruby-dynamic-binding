@@ -5,11 +5,12 @@ module DynamicBinding
     end
 
     def method_missing(m, *args)
-      @bindings.each do |bind|
+      @bindings.reverse_each do |bind|
         begin
           method = eval("method(%s)" % m.inspect, bind)
-          return method.call(*args)
         rescue NameError
+        else
+          return method.call(*args)
         end
         begin
           value = eval(m.to_s, bind)
@@ -17,7 +18,7 @@ module DynamicBinding
         rescue NameError
         end
       end
-      raise NoMethodError, "No such method: %s" % m
+      raise NoMethodError, "No such variable or method: %s" % m
     end
 
     def pop_binding
@@ -34,6 +35,10 @@ module DynamicBinding
 
     def push_hash(vars)
       push_instance Struct.new(*vars.keys).new(*vars.values)
+    end
+
+    def get_binding
+      instance_eval { binding }
     end
 
     def run_proc(p, *args)
