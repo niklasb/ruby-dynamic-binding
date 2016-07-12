@@ -6,6 +6,6 @@ Gem::Specification.new do |s|
   s.description = "A small Gem implementing a certain form of dynamic binding"
   s.authors     = ["Niklas Baumstark"]
   s.email       = 'niklas.baumstark@gmail.com'
-  s.files       = ["lib/**/*.rb"]
+  s.files       = Dir["lib/**/*.rb"]
   s.homepage    = 'https://github.com/niklasb/ruby-dynamic-binding'
 end
