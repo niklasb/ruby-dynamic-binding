@@ -41,8 +41,8 @@ module DynamicBinding
       instance_eval { binding }
     end
 
-    def run_proc(p, *args)
-      instance_exec(*args, &p)
+    def run_proc(p, *args, **kwargs)
+      instance_exec(*args, **kwargs, &p)
     end
 
     def push_method(name, p, obj=nil)
