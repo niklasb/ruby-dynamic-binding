@@ -58,6 +58,6 @@ end
 
 class Proc
   def call_with_binding(bind, *args)
-    LookupStack.new([bind]).run_proc(self, *args)
+    DynamicBinding::LookupStack.new([bind]).run_proc(self, *args)
   end
 end
