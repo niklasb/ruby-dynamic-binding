@@ -57,7 +57,7 @@ module DynamicBinding
 end
 
 class Proc
-  def call_with_binding(bind, *args)
-    DynamicBinding::LookupStack.new([bind]).run_proc(self, *args)
+  def call_with_binding(bind, *args, **kwargs)
+    DynamicBinding::LookupStack.new([bind]).run_proc(self, *args, **kwargs)
   end
 end
