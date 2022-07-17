@@ -41,8 +41,8 @@ module DynamicBinding
       instance_eval { binding }
     end
 
-    def run_proc(p, *args)
-      instance_exec(*args, &p)
+    def run_proc(p, *args, **kwargs)
+      instance_exec(*args, **kwargs, &p)
     end
 
     def push_method(name, p, obj=nil)
@@ -57,7 +57,7 @@ module DynamicBinding
 end
 
 class Proc
-  def call_with_binding(bind, *args)
-    LookupStack.new([bind]).run_proc(self, *args)
+  def call_with_binding(bind, *args, **kwargs)
+    DynamicBinding::LookupStack.new([bind]).run_proc(self, *args, **kwargs)
   end
 end
